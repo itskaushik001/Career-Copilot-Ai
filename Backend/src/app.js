@@ -8,11 +8,14 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-     /\.vercel\.app$/],
-  credentials: true
+    origin: [
+        "http://localhost:5173",
+        "https://vercel.app",
+        /\.vercel\.app$/
+    ],
+    credentials: true
 }));
+
 
 app.use("/api/auth",authRouter)
 app.use("/api/interview",interviewRouter)
