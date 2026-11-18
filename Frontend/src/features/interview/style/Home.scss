@@ -26,8 +26,80 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem 1.5rem;
-    gap: 2rem;
+    padding: 2.5rem 1.5rem;
+    gap: 1.5rem;
+}
+
+// ── Top Navigation Bar ────────────────────────────────────────────────────────
+.home-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 900px;
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: #ffffff;
+        text-decoration: none;
+
+        .brand-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #ff2d78 0%, #ff7b5d 100%);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(255, 45, 120, 0.35);
+        }
+
+        .ai-pill {
+            background: rgba(255, 45, 120, 0.2);
+            color: #ff2d78;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(255, 45, 120, 0.3);
+        }
+    }
+
+    .user-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .user-greeting {
+            font-size: 0.85rem;
+            color: #8b949e;
+            strong {
+                color: #e6edf3;
+            }
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 0.35rem 0.75rem;
+            border-radius: 0.4rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background: #21262d;
+                border-color: #8b949e;
+            }
+        }
+    }
 }
 
 // ── Page Header ──────────────────────────────────────────────────────────────
@@ -44,13 +116,33 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     p {
         color: $text-muted;
         font-size: 0.95rem;
-        max-width: 480px;
+        max-width: 520px;
         margin: 0 auto;
         line-height: 1.6;
     }
 
     .highlight {
         color: $accent;
+    }
+}
+
+// ── Error Banner ──────────────────────────────────────────────────────────────
+.error-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    background-color: rgba(#ff4d4d, 0.12);
+    border: 1px solid rgba(#ff4d4d, 0.35);
+    border-radius: 0.5rem;
+    color: #ff8585;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+
+    span {
+        flex: 1;
     }
 }
 
@@ -130,6 +222,7 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
         outline: none;
         transition: border-color 0.2s;
         line-height: 1.5;
+        box-sizing: border-box;
 
         &::placeholder {
             color: $text-muted;
@@ -143,15 +236,27 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
             flex: unset;
             height: 96px;
         }
+
+        &--disabled {
+            opacity: 0.45;
+            background-color: #121620 !important;
+            border-color: #202738 !important;
+            cursor: not-allowed;
+            color: #6e7681;
+
+            &::placeholder {
+                color: #555e6d;
+            }
+        }
     }
 
     &--left {
-        position: relative;
+        display: flex;
+        flex-direction: column;
 
         .char-counter {
-            position: absolute;
-            bottom: 2.25rem;
-            right: 2rem;
+            align-self: flex-end;
+            margin-top: 0.35rem;
             font-size: 0.75rem;
             color: $text-muted;
         }
@@ -181,6 +286,12 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
         background-color: rgba($badge-best, 0.15);
         color: $badge-best;
         border: 1px solid rgba($badge-best, 0.3);
+    }
+
+    &--disabled {
+        background-color: rgba(#7d8590, 0.15);
+        color: #8b949e;
+        border: 1px solid rgba(#7d8590, 0.3);
     }
 }
 
@@ -239,6 +350,91 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     }
 }
 
+// ── Uploaded File Preview Card ────────────────────────────────────────────────
+.uploaded-file-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: #141b26;
+    border: 1px solid #2e4368;
+    border-radius: 0.6rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 0;
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 0.4rem;
+        background: rgba(#ff2d78, 0.15);
+        color: #ff2d78;
+        flex-shrink: 0;
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        min-width: 0;
+    }
+
+    &__name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #e6edf3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.72rem;
+        color: #7d8590;
+    }
+
+    &__badge {
+        color: #3fb950;
+        font-weight: 500;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        flex-shrink: 0;
+    }
+
+    &__remove-btn {
+        background: transparent;
+        border: 1px solid rgba(#ff4d4d, 0.3);
+        color: #ff6b6b;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+        border-radius: 0.35rem;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            background: rgba(#ff4d4d, 0.15);
+            border-color: #ff4d4d;
+        }
+    }
+}
+
 // ── OR Divider ────────────────────────────────────────────────────────────────
 .or-divider {
     display: flex;
@@ -265,6 +461,15 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
+    .disabled-notice {
+        font-size: 0.74rem;
+        color: #e3b341;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        line-height: 1.4;
+    }
 }
 
 // ── Info Box ──────────────────────────────────────────────────────────────────
@@ -320,40 +525,109 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     }
 }
 
-.recent-reports{
+// ── Loading Screen ────────────────────────────────────────────────────────────
+.loading-screen {
+    min-height: 100vh;
+    width: 100%;
+    background-color: $bg-page;
+    color: $text-primary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+
+    .loading-spinner {
+        width: 56px;
+        height: 56px;
+        border: 4px solid rgba(#ff2d78, 0.15);
+        border-top-color: #ff2d78;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    p {
+        color: $text-muted;
+        font-size: 0.95rem;
+        max-width: 440px;
+        margin: 0;
+        line-height: 1.5;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.recent-reports {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     width: 100%;
     max-width: 900px;
 
-    .reports-list{
+    h2 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: $text-primary;
+        margin: 0;
+    }
+
+    .reports-list {
         display: flex;
         gap: 0.75rem;
         flex-wrap: wrap;
 
-        .report-item{
+        .report-item {
             background-color: $bg-card;
             border: 1px solid $border-color;
             border-radius: 0.5rem;
             padding: 1rem;
             flex: 1;
+            min-width: 250px;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.4rem;
             cursor: pointer;
-            flex-shrink: 0;
+            transition: border-color 0.2s, transform 0.15s;
+
+            &:hover {
+                border-color: $accent;
+                transform: translateY(-2px);
+            }
+
+            h3 {
+                font-size: 0.95rem;
+                font-weight: 600;
+                margin: 0;
+                color: $text-primary;
+            }
+
+            .report-meta {
+                font-size: 0.75rem;
+                color: $text-muted;
+                margin: 0;
+            }
 
             .match-score {
                 font-size: 0.8rem;
-                font-weight: 600;
+                font-weight: 700;
                 color: $accent;
-                align-items: flex-start;
+                margin: 0;
             }
         }
     }
 }
-
 
 // ── Page Footer ───────────────────────────────────────────────────────────────
 .page-footer {
